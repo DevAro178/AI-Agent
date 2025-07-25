@@ -6,6 +6,7 @@ dist/
 wheels/
 *.egg-info
 *.txt
+calculator/*.md
 
 # Virtual environments
 .venv

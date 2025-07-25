@@ -1,5 +1,6 @@
 from functions.is_subdir import is_subdir
 import os
+from google.genai import types
 
 def write_file(working_directory, file_path, content):
     try:
@@ -19,3 +20,20 @@ def write_file(working_directory, file_path, content):
     except Exception as e:
         return f"Error: {e}"
         
+schema_write_file = types.FunctionDeclaration(
+    name="write_file",
+    description="write or overwrite the content in the provided file, constrained to the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="File name with path relative to working directory to which the provided content will be written or overwritten",
+            ),
+            "content": types.Schema(
+                type=types.Type.STRING,
+                description="Content that will be written to the specifed file, constrained to the working directory.",
+            )
+        },
+    ),
+)
